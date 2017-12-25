@@ -30,6 +30,7 @@ namespace App4
             BindingContext = this.viewModel = viewModel;
         }
 
+        /* Open the view UpdateItemPage*/
         async void UpdateItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new App4.Views.UpdateItemPage(viewModel));

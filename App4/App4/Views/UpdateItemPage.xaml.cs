@@ -1,4 +1,6 @@
-﻿using System;
+﻿/*The code for modifying an item */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
