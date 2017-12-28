@@ -35,5 +35,11 @@ namespace App4
         {
             await Navigation.PushAsync(new App4.Views.UpdateItemPage(viewModel));
         }
+
+        async void DeleteItem_Clicked(object sender, EventArgs e)
+        {
+            await viewModel.DeleteItem_Clicked();
+            await Navigation.PopToRootAsync();
+        }
     }
 }

@@ -64,8 +64,12 @@ namespace App4
         public async Task<bool> DeleteItemAsync(string id)
         {
             var _item = realm.All<Item>().Where((Item arg) => arg.Id == id).FirstOrDefault();
-            realm.Remove(_item);
-
+            if (_item == null)
+                return await Task.FromResult(true);
+            realm.Write(() =>
+            {
+                realm.Remove(_item);
+            });
             return await Task.FromResult(true);
         }
 

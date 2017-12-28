@@ -4,6 +4,7 @@
              x:Class="App4.ItemDetailPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Clicked="DeleteItem_Clicked" />
         <!-- Add a button Update-->
         <ToolbarItem Text="Update" Clicked="UpdateItem_Clicked" />
     </ContentPage.ToolbarItems>
