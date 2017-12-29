@@ -37,9 +37,12 @@ namespace App4
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            ItemsListView.ItemsSource = null;
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            // if (viewModel.Items.Count == 0)
+            viewModel.LoadItemsCommand.Execute(null);
+            ItemsListView.ItemsSource = viewModel.Items;
+
         }
     }
 }

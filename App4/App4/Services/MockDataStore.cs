@@ -43,6 +43,7 @@ namespace App4
             realm.Write(() =>
             {
                 item.Id = Guid.NewGuid().ToString();
+                realm.Add(item);
             });
 
             return await Task.FromResult(true);
@@ -80,7 +81,7 @@ namespace App4
 
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(realm.All<Item>());
+            return await Task.FromResult(realm.All<Item>().OrderBy(x => x.Text).ToList());
         }
     }
 }

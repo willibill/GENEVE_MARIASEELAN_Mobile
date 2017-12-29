@@ -2,20 +2,20 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using App4.Helpers;
 using Xamarin.Forms;
 
 namespace App4
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableRangeCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableRangeCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
@@ -24,6 +24,7 @@ namespace App4
                 Items.Add(_item);
                 await DataStore.AddItemAsync(_item);
             });
+
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -33,23 +34,17 @@ namespace App4
 
             IsBusy = true;
 
-            try
-            {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
-                {
-                    Items.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            Items.Clear();
+            var items = await DataStore.GetItemsAsync(true);
+
+            Items.ReplaceRange(items);
+            OnPropertyChanged("items");
+
+
+            IsBusy = false;
+
+
         }
     }
+
 }
