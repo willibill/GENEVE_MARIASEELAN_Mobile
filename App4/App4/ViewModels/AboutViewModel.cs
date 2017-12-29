@@ -11,7 +11,7 @@ namespace App4
         {
             Title = "About";
 
-            OpenWebCommand = new Command(() => Device.OpenUri(new Uri("https://xamarin.com/platform")));
+            OpenWebCommand = new Command(() => Device.OpenUri(new Uri("https://memegenerator.net/img/instances/500x/65346574/its-just-a-prank-bro.jpg")));
         }
 
         public ICommand OpenWebCommand { get; }
